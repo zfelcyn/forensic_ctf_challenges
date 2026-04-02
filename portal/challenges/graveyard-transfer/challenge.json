@@ -1,39 +1,42 @@
 {
   "id": "graveyard-transfer",
   "sortOrder": 4,
-  "title": "Graveyard Transfer",
+  "title": "Deceitful Transfer",
   "status": "concept",
   "category": "Network Forensics",
   "difficulty": "Hard",
   "points": 300,
-  "summary": "An FTP packet capture hides the real evidence in a passive-mode data stream.",
-  "scenario": "An FTP retrieval looks routine until the passive-mode data connection is reconstructed. Solvers need to identify the correct data stream, recover the transferred archive, and inspect the recovered files to obtain the flag.",
+  "summary": "A parked-outside surveillance PCAP captures an FTP gallery sync tied to suspected infidelity and hidden spending.",
+  "scenario": "You are a private investigator hired by a woman who believes her husband has been cheating, spending thousands on OnlyFans, and stashing pictures through plain FTP. You park outside the house long enough to capture a packet trace of his session. The hard part is that the FTP traffic contains multiple passive data streams and decoy files: solvers need to reconstruct the right transfers, identify the meaningful image, and inspect that recovered JPEG for hidden appended data.",
   "recommendedTools": [
     "Wireshark",
     "Follow TCP Stream",
-    "Export",
+    "xxd",
+    "binwalk",
     "unzip"
   ],
   "learningObjectives": [
-    "Map control traffic to a separate FTP data channel",
-    "Reconstruct transferred evidence from packet captures"
+    "Map FTP control traffic to multiple passive-mode data channels",
+    "Correlate a recovered text artifact with a second recovered media artifact",
+    "Carve hidden appended data from a transferred JPEG"
   ],
   "artifacts": [
     {
-      "name": "graveyard_transfer_<seed>.pcap",
-      "purpose": "Generated packet capture with control and passive-mode data streams"
+      "name": "deceitful_transfer_<seed>.pcap",
+      "purpose": "Generated packet capture with multiple passive-mode FTP data streams"
     },
     {
       "name": "incident_memo.txt",
-      "purpose": "Narrative note describing the suspicious transfer window"
+      "purpose": "Case note from the private-investigator surveillance setup"
     }
   ],
   "hints": [
-    "The interesting bytes are probably not on port 21.",
-    "Recover the transferred file before trying to search for the flag."
+    "More than one passive data stream matters in this capture.",
+    "One recovered text file points to which image deserves a closer look."
   ],
   "sourceNotes": [
-    "Notes_CyberForensics/Exam1Notes/ftp_wireshark.md"
+    "Notes_CyberForensics/Exam1Notes/ftp_wireshark.md",
+    "Notes_CyberForensics/Exam1Notes/appended_stego.md"
   ],
   "deployment": {
     "kind": "pcap-analysis",
@@ -45,7 +48,7 @@
   },
   "llmHandoff": {
     "scope": "This folder contains the metadata, generator, and internal notes for the challenge.",
-    "implementNext": "Tune the FTP story, credentials, or transferred decoy files while keeping the packet-reconstruction solve path intact.",
+    "implementNext": "Tune the FTP case story, decoy transfer set, or hidden JPEG payload while keeping the multi-stream reconstruction path intact.",
     "doNotDoYet": "Do not put the flag directly into plaintext control-channel traffic."
   }
 }

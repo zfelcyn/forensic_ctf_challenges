@@ -1,11 +1,12 @@
-# Graveyard Transfer Handoff
+# Deceitful Transfer Handoff
 
 Scope: Implement only this folder.
 
 Build target:
-1. Generate a realistic FTP PCAP with one meaningful file transfer.
-2. Make the flag recoverable only after reconstructing the transferred artifact.
-3. Keep the final artifact analysis at a level suitable for the course.
+1. Generate a realistic FTP PCAP for a private-investigator surveillance story.
+2. Include multiple passive data streams and at least one meaningful decoy transfer.
+3. Require solvers to recover a text clue before choosing the right image artifact.
+4. Keep the final flag recoverable only after JPEG-tail inspection and hidden archive extraction.
 
 Keep unchanged:
 - Portal frontend files
