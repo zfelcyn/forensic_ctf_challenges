@@ -1,0 +1,50 @@
+{
+  "id": "carbon-offset",
+  "sortOrder": 1,
+  "title": "Carbon Offset",
+  "status": "concept",
+  "category": "Steganography",
+  "difficulty": "Easy",
+  "points": 100,
+  "summary": "A retreat photo looks normal until the bytes after the JPEG footer are inspected.",
+  "scenario": "An employee under review sent one final image to the team chat before their laptop was seized. The picture itself is harmless, but the file structure suggests it was used as a dead-drop for a plaintext confession. Students should inspect the image footer, recover the appended payload, and extract the hidden flag.",
+  "recommendedTools": [
+    "xxd",
+    "hex editor",
+    "strings"
+  ],
+  "learningObjectives": [
+    "Recognize valid JPEG end markers",
+    "Recover appended evidence from a seemingly normal media file"
+  ],
+  "artifacts": [
+    {
+      "name": "retreat_photo.jpg",
+      "purpose": "Primary image containing appended hidden data"
+    },
+    {
+      "name": "briefing.txt",
+      "purpose": "Short case note handed to solvers"
+    }
+  ],
+  "hints": [
+    "A JPEG should stop after its normal footer.",
+    "Check the tail of the file instead of only viewing the image."
+  ],
+  "sourceNotes": [
+    "Notes_CyberForensics/Exam1Notes/appended_stego.md"
+  ],
+  "deployment": {
+    "kind": "file-drop",
+    "composeFile": null,
+    "launchUrl": null
+  },
+  "flagValidation": {
+    "sha256": "839413da4fdc8393a00217ba3cc95a51d743d4b1845c26ee0855e70defd27cbd"
+  },
+  "llmHandoff": {
+    "scope": "Only this folder should be needed to build the final challenge bundle.",
+    "implementNext": "Create a believable JPEG and append either plaintext or lightly encoded text after the real FFD9 footer.",
+    "doNotDoYet": "Do not change the portal UI or create cross-folder dependencies."
+  }
+}

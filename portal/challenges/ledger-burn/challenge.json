@@ -1,0 +1,50 @@
+{
+  "id": "ledger-burn",
+  "sortOrder": 2,
+  "title": "Ledger Burn",
+  "status": "concept",
+  "category": "Anti-Forensics Techniques",
+  "difficulty": "Medium",
+  "points": 200,
+  "summary": "A valid ZIP archive was padded with a hidden payload after its official end-of-directory record.",
+  "scenario": "Finance exported a payroll archive right before a workstation wipe. The ZIP opens normally, but a forensic review shows the file extends well beyond the expected archive boundary. Students must identify where the archive truly ends, carve the appended payload, and recover the flag from the concealed object.",
+  "recommendedTools": [
+    "zipinfo",
+    "dd",
+    "binwalk"
+  ],
+  "learningObjectives": [
+    "Validate archive metadata against raw file length",
+    "Carve appended content after a legitimate container footer"
+  ],
+  "artifacts": [
+    {
+      "name": "quarter_close.zip",
+      "purpose": "Primary archive with hidden data appended after EOCD"
+    },
+    {
+      "name": "audit_note.txt",
+      "purpose": "Case narrative that points to suspicious accounting activity"
+    }
+  ],
+  "hints": [
+    "Use archive metadata to find the real end of the ZIP.",
+    "The archive is not corrupt. Something was added after it."
+  ],
+  "sourceNotes": [
+    "Notes_CyberForensics/Exam1Notes/zip_hiding_files.md"
+  ],
+  "deployment": {
+    "kind": "file-drop",
+    "composeFile": null,
+    "launchUrl": null
+  },
+  "flagValidation": {
+    "sha256": "8a123c96eb2976a5fe8183f277b448a6efe13e6ab43b5bf8058ad35d846325f6"
+  },
+  "llmHandoff": {
+    "scope": "Implement the challenge entirely inside this folder and keep the archive self-contained.",
+    "implementNext": "Create a clean ZIP, append a second file type after the EOCD, and document the exact carve offsets in the internal solution.",
+    "doNotDoYet": "Do not add extra stego layers unless the team explicitly wants a higher difficulty."
+  }
+}

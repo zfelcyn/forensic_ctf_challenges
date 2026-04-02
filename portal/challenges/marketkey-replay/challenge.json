@@ -1,0 +1,50 @@
+{
+  "id": "marketkey-replay",
+  "sortOrder": 5,
+  "title": "MarketKey Replay",
+  "status": "concept",
+  "category": "Web / Application Forensics",
+  "difficulty": "Hard",
+  "points": 300,
+  "summary": "An Android access-token generator must be decompiled to reproduce the suspect's login value for a specific date.",
+  "scenario": "Investigators seized an APK used by a marketplace operator to generate rotating daily access tokens. The suspect insists the token on the target date cannot be reproduced without the original phone. Students must reverse the app logic, recover the secret material, and calculate the exact token that unlocks the final flag.",
+  "recommendedTools": [
+    "jadx",
+    "apktool",
+    "python3"
+  ],
+  "learningObjectives": [
+    "Extract token-generation logic from a mobile application",
+    "Reproduce a date-driven credential outside the original runtime"
+  ],
+  "artifacts": [
+    {
+      "name": "MarketKey.apk",
+      "purpose": "Primary application to decompile and analyze"
+    },
+    {
+      "name": "timeline.txt",
+      "purpose": "Case note with the date the token must match"
+    }
+  ],
+  "hints": [
+    "Search the decompiled code for date formatting and crypto primitives.",
+    "The final answer should come from recreating the token logic, not brute force."
+  ],
+  "sourceNotes": [
+    "Notes_CyberForensics/Exam2Notes/apk_challenge.md"
+  ],
+  "deployment": {
+    "kind": "apk-analysis",
+    "composeFile": null,
+    "launchUrl": null
+  },
+  "flagValidation": {
+    "sha256": "cf3a6fbcc68e8b450e20eae41266ef0cd3f4dfd74bd2392761bcc26d3e0fbb3a"
+  },
+  "llmHandoff": {
+    "scope": "All app samples, helper scripts, and solution notes should stay inside this folder.",
+    "implementNext": "Create or adapt an APK where the token algorithm can be recovered statically and replayed for one target date.",
+    "doNotDoYet": "Do not add server-side validation unless the challenge is intentionally expanded into a live service."
+  }
+}

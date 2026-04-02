@@ -1,0 +1,8 @@
+services:
+  portal:
+    container_name: forensic-ctf-portal
+    build:
+      context: ./portal
+    ports:
+      - "8080:8080"
+    restart: unless-stopped

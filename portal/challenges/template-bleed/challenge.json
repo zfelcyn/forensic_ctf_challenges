@@ -1,0 +1,50 @@
+{
+  "id": "template-bleed",
+  "sortOrder": 3,
+  "title": "Template Bleed",
+  "status": "concept",
+  "category": "File System Forensics",
+  "difficulty": "Medium",
+  "points": 200,
+  "summary": "A DOCX review packet leaks evidence through embedded media and leftover office package internals.",
+  "scenario": "HR exported a disciplinary report as a DOCX and claimed the original evidence had been removed. A closer look at the Office container reveals that the package still holds media artifacts that were not meant to survive distribution. Students should unpack the document, inspect its internal structure, and recover the hidden flag from an embedded file.",
+  "recommendedTools": [
+    "unzip",
+    "find",
+    "binwalk"
+  ],
+  "learningObjectives": [
+    "Treat Office files as ZIP containers during forensic review",
+    "Locate hidden or overlooked media inside application package structures"
+  ],
+  "artifacts": [
+    {
+      "name": "performance_review.docx",
+      "purpose": "Primary Office document with hidden evidence in package contents"
+    },
+    {
+      "name": "case_summary.txt",
+      "purpose": "Background note framing the insider investigation"
+    }
+  ],
+  "hints": [
+    "A DOCX is not a single opaque file format.",
+    "Check the `word/` package contents before trying heavy carving."
+  ],
+  "sourceNotes": [
+    "Notes_CyberForensics/Exam1Notes/file_carving.md"
+  ],
+  "deployment": {
+    "kind": "file-drop",
+    "composeFile": null,
+    "launchUrl": null
+  },
+  "flagValidation": {
+    "sha256": "6c76064f437600629cf426e7e684cf757c6198a3f7dab1ae4a702843c811423e"
+  },
+  "llmHandoff": {
+    "scope": "Keep all challenge files and solution notes isolated to this folder.",
+    "implementNext": "Build a DOCX with plausible business content and hide the real clue in an embedded image or media object inside the package.",
+    "doNotDoYet": "Do not turn this into a deleted-file recovery challenge unless the course scope changes."
+  }
+}

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Forensic CTF Portal</title>
+    <meta
+      name="description"
+      content="Modular portal for forensic CTF challenge briefs, challenge metadata, and deployment handoff details."
+    />
+    <link rel="stylesheet" href="assets/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="masthead">
+        <div class="title-wrap">
+          <span class="prompt-dot">.</span>
+          <h1>/challenges</h1>
+        </div>
+        <div class="scoreboard" aria-label="Progress summary">
+          <article class="score-pill">
+            <span class="score-label">Challenges</span>
+            <strong id="challengeCount">0</strong>
+          </article>
+          <article class="score-pill">
+            <span class="score-label">Solved</span>
+            <strong id="solvedCount">0</strong>
+          </article>
+          <article class="score-pill">
+            <span class="score-label">Points</span>
+            <strong id="pointsCount">0</strong>
+          </article>
+        </div>
+      </header>
+
+      <section class="workspace">
+        <aside class="tree-panel" aria-label="Challenge list">
+          <div id="challengeTree"></div>
+        </aside>
+
+        <section class="window-panel" id="detailPanel" aria-live="polite">
+          <div class="detail-empty">
+            <p>Select a challenge to inspect it and submit a flag.</p>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <script type="module" src="assets/app.js"></script>
+  </body>
+  </html>

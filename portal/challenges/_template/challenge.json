@@ -1,0 +1,45 @@
+{
+  "id": "template-slug",
+  "sortOrder": 99,
+  "title": "Template Challenge",
+  "status": "concept",
+  "category": "File System Forensics",
+  "difficulty": "Easy",
+  "points": 100,
+  "summary": "Replace this with a one-sentence catalog summary.",
+  "scenario": "Replace this with a short scenario that describes the hidden evidence, the student-facing artifact, and the expected investigation path.",
+  "recommendedTools": [
+    "strings",
+    "binwalk"
+  ],
+  "learningObjectives": [
+    "Replace objective one",
+    "Replace objective two"
+  ],
+  "artifacts": [
+    {
+      "name": "artifact-name.ext",
+      "purpose": "Describe the student-facing file or service"
+    }
+  ],
+  "hints": [
+    "Replace hint one",
+    "Replace hint two"
+  ],
+  "sourceNotes": [
+    "Notes_CyberForensics/path/to/source-note.md"
+  ],
+  "deployment": {
+    "kind": "file-drop",
+    "composeFile": null,
+    "launchUrl": null
+  },
+  "flagValidation": {
+    "sha256": "replace-with-sha256-of-the-real-flag"
+  },
+  "llmHandoff": {
+    "scope": "This folder is the full scope for the challenge.",
+    "implementNext": "Replace placeholder artifacts and write the real challenge files.",
+    "doNotDoYet": "Do not touch the portal frontend unless the challenge schema changes."
+  }
+}
