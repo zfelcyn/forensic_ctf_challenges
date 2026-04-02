@@ -2,14 +2,26 @@
 
 from __future__ import annotations
 
+import io
 import sys
 from pathlib import Path
 
+from PIL import Image
+
 sys.path.append(str(Path(__file__).resolve().parents[2] / "scripts"))
 
-from challenge_utils import bundle_readme, ensure_output_dir, flag_for, parse_common_args, poster_image_bytes, seeded_rng, write_bytes, write_text, zip_bytes
+from challenge_utils import bundle_readme, ensure_output_dir, flag_for, parse_common_args, seeded_rng, write_bytes, write_text, zip_bytes
 
 SLUG = "carbon-offset"
+ASSET_PATH = Path(__file__).resolve().parent / "assets" / "clav.jpg"
+
+
+def jpeg_from_asset() -> bytes:
+    with Image.open(ASSET_PATH) as image:
+        converted = image.convert("RGB")
+        buffer = io.BytesIO()
+        converted.save(buffer, format="JPEG", quality=92, optimize=True)
+    return buffer.getvalue()
 
 
 def main() -> int:
@@ -17,38 +29,41 @@ def main() -> int:
     seed, rng = seeded_rng(args.seed)
     output_dir = ensure_output_dir(args.output_dir)
 
-    project_code = rng.choice(["glass-harbor", "night-garden", "amber-lift", "silent-dune"])
-    photo_name = f"retreat_photo_{project_code}_{seed[:4]}.jpg"
-    accent = rng.choice([(181, 242, 73), (120, 208, 255), (255, 182, 90)])
-    base = rng.choice([(34, 39, 46), (28, 34, 40), (36, 32, 44)])
+    capture_tag = rng.choice(["kick", "stream", "vod", "clip"])
+    photo_name = f"clav_stream_capture_{capture_tag}_{seed[:4]}.jpg"
 
     hidden_note = (
         "Recovered note\n"
         "--------------\n"
-        "The chat export was scrubbed, but the staged image still carried the confession.\n"
+        "Clavicular got frame mogged on stream, but the real damage was in the bytes tacked onto the image.\n"
+        "ASU Frat Leader left the evidence in the upload instead of the chat log.\n"
         f"{flag_for(SLUG)}\n"
     )
     hidden_archive = zip_bytes(
         {
-            "evidence/recovered_note.txt": hidden_note,
-            "evidence/camera_roll.log": "transfer complete\nsource=conference-share\nstatus=archived\n",
+            "evidence/mog_report.txt": hidden_note,
+            "evidence/stream_notes.txt": (
+                "source=kick-export\n"
+                "clip_status=normal_render\n"
+                "review_hint=check_after_real_jpeg_footer\n"
+            ),
         }
     )
 
-    image_bytes = poster_image_bytes(1280, 720, base, accent, f"Project {project_code}", "JPEG")
+    image_bytes = jpeg_from_asset()
     write_bytes(output_dir / photo_name, image_bytes + hidden_archive)
     write_text(
         output_dir / "briefing.txt",
         (
-            "A departing analyst sent one final retreat photo before their laptop was taken.\n"
-            "The image renders normally, but the file size does not line up with what the photo should contain.\n"
+            "The photo of Clav and ASU Frat Leader looks normal from a Kick stream capture.\n"
+            "Clavicular got brutally frame mogged, but someone also hid extra bytes after the real JPEG image data.\n"
         ),
     )
     write_text(
         output_dir / "README_FIRST.txt",
         bundle_readme(
             "Carbon Offset",
-            "Inspect the JPEG structure and recover the hidden payload appended after the real image footer.",
+            "Inspect the stream capture JPEG and recover the hidden payload appended after the real image footer.",
             seed,
             ["xxd", "binwalk", "dd", "unzip"],
             [

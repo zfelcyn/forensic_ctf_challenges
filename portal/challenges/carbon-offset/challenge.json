@@ -6,8 +6,8 @@
   "category": "Steganography",
   "difficulty": "Easy",
   "points": 100,
-  "summary": "A retreat photo hides a compressed evidence bundle after the real JPEG footer.",
-  "scenario": "An employee retreat photo looks ordinary at first glance, but the file still carries hidden bytes beyond the legitimate image end marker. Solvers need to confirm where the JPEG actually ends, carve the appended payload, and extract the recovered evidence package to obtain the flag.",
+  "summary": "A Kick stream capture of Clav and ASU Frat Leader hides a compressed evidence bundle after the real JPEG footer.",
+  "scenario": "The photo of Clav and ASU Frat Leader looks pretty normal from the stream capture, except Clavicular got brutally frame mogged and the upload is larger than it should be. Solvers need to confirm where the real JPEG ends, carve the appended payload, and extract the hidden note to obtain the flag.",
   "recommendedTools": [
     "xxd",
     "binwalk",
@@ -20,8 +20,8 @@
   ],
   "artifacts": [
     {
-      "name": "retreat_photo_<seed>.jpg",
-      "purpose": "Generated JPEG with an appended archive payload"
+      "name": "clav_stream_capture_<seed>.jpg",
+      "purpose": "Generated JPEG based on the provided stream image with an appended archive payload"
     },
     {
       "name": "briefing.txt",
