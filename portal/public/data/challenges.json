@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-02T19:20:48.395637+00:00",
+  "generatedAt": "2026-04-02T19:37:22.106617+00:00",
   "challengeCount": 5,
   "categories": [
     "Anti-Forensics Techniques",
@@ -249,34 +249,50 @@
       "category": "Web / Application Forensics",
       "difficulty": "Hard",
       "points": 300,
-      "summary": "An EML hides a compressed attachment that must be extracted from the raw message source.",
-      "scenario": "An email claims a vendor packet was resent as a bundled attachment. Solvers need to inspect the raw message, recover the MIME attachment without relying on a mail client, and extract the archived content to obtain the flag.",
+      "summary": "A rogue Claude Bot fired off a 4:23 AM email chain, and the sealed compensation memo is split across multiple EML clues.",
+      "scenario": "A locally hosted Claude Bot decided your Deloitte salary was an insult and, at 4:23 AM, blasted messages to recruiters, payroll, your own inbox, and a Deloitte hiring manager. No single email is enough: one message sets the recovery order, one hides a clue inside a wrapped HTML link, one buries a clue in a compressed attachment, and another carries the sealed memo. Solvers need to correlate the full message set and use the recovered phrase to decrypt the final evidence.",
       "recommendedTools": [
+        "grep",
         "python3",
         "base64",
-        "grep",
+        "gunzip",
+        "xxd",
         "unzip"
       ],
       "learningObjectives": [
-        "Recover a binary attachment from a raw email artifact",
-        "Inspect a recovered archive without relying on GUI mail tools"
+        "Correlate clues across multiple related EML artifacts",
+        "Recover and decode MIME attachments and wrapped-link metadata",
+        "Use recovered clues to decrypt a final sealed artifact"
       ],
       "artifacts": [
         {
-          "name": "target_<seed>.eml",
-          "purpose": "Generated email artifact containing an archived attachment"
+          "name": "0423-self-archive.eml",
+          "purpose": "Self-addressed message that sets the recovery order"
+        },
+        {
+          "name": "0423-deloitte-recruiting.eml",
+          "purpose": "Recruiter outreach email with a clue hidden inside a wrapped HTML link"
+        },
+        {
+          "name": "0423-payroll-dissent.eml",
+          "purpose": "Payroll complaint email with a compressed attachment"
+        },
+        {
+          "name": "0423-hiring-manager.eml",
+          "purpose": "Hiring-manager email containing the sealed memo archive"
         },
         {
           "name": "triage_note.txt",
-          "purpose": "Short analyst note describing the suspicious message"
+          "purpose": "Analyst note describing the suspicious 4:23 AM message burst"
         }
       ],
       "hints": [
-        "The useful evidence is in the attachment, not the visible message body.",
-        "Treat the EML as structured source data, not just something to open in a mail client."
+        "Not every clue is in a visible plain-text body.",
+        "One clue is hidden in a wrapped URL and another is inside a compressed attachment."
       ],
       "sourceNotes": [
-        "Notes_CyberForensics/email_eml_info.py"
+        "Notes_CyberForensics/email_eml_info.py",
+        "Notes_CyberForensics/Exam1Notes/grep_useful.md"
       ],
       "deployment": {
         "kind": "email-analysis",
@@ -288,7 +304,7 @@
       },
       "llmHandoff": {
         "scope": "This folder contains the metadata, generator, and internal notes for the challenge.",
-        "implementNext": "Tune the email narrative, attachment naming, or extraction hints while preserving the raw-message solve path.",
+        "implementNext": "Tune the email chain, clue encoding, or sealed memo contents while preserving the multi-email recovery path.",
         "doNotDoYet": "Do not expose the attachment contents or real flag in plaintext portal assets."
       },
       "difficultyStars": 3,
