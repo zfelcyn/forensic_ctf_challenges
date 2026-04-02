@@ -9,5 +9,8 @@ Student-facing network challenge where the useful evidence lives inside the FTP 
 3. Analyze the recovered object for the flag.
 
 ## Suggested Student Files
-- `graveyard_transfer.pcap`
+- `graveyard_transfer_<seed>.pcap`
 - `incident_memo.txt`
+
+## Generator
+Run `generate.py` to create the solver bundle for this challenge.

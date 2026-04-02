@@ -6,12 +6,13 @@
   "category": "Steganography",
   "difficulty": "Easy",
   "points": 100,
-  "summary": "A retreat photo looks normal until the bytes after the JPEG footer are inspected.",
-  "scenario": "An employee under review sent one final image to the team chat before their laptop was seized. The picture itself is harmless, but the file structure suggests it was used as a dead-drop for a plaintext confession. Students should inspect the image footer, recover the appended payload, and extract the hidden flag.",
+  "summary": "A retreat photo hides a compressed evidence bundle after the real JPEG footer.",
+  "scenario": "An employee retreat photo looks ordinary at first glance, but the file still carries hidden bytes beyond the legitimate image end marker. Solvers need to confirm where the JPEG actually ends, carve the appended payload, and extract the recovered evidence package to obtain the flag.",
   "recommendedTools": [
     "xxd",
-    "hex editor",
-    "strings"
+    "binwalk",
+    "dd",
+    "unzip"
   ],
   "learningObjectives": [
     "Recognize valid JPEG end markers",
@@ -19,12 +20,12 @@
   ],
   "artifacts": [
     {
-      "name": "retreat_photo.jpg",
-      "purpose": "Primary image containing appended hidden data"
+      "name": "retreat_photo_<seed>.jpg",
+      "purpose": "Generated JPEG with an appended archive payload"
     },
     {
       "name": "briefing.txt",
-      "purpose": "Short case note handed to solvers"
+      "purpose": "Case note handed to solvers"
     }
   ],
   "hints": [
@@ -43,8 +44,8 @@
     "sha256": "839413da4fdc8393a00217ba3cc95a51d743d4b1845c26ee0855e70defd27cbd"
   },
   "llmHandoff": {
-    "scope": "Only this folder should be needed to build the final challenge bundle.",
-    "implementNext": "Create a believable JPEG and append either plaintext or lightly encoded text after the real FFD9 footer.",
-    "doNotDoYet": "Do not change the portal UI or create cross-folder dependencies."
+    "scope": "This folder contains the metadata, generator, and internal notes for the challenge.",
+    "implementNext": "Tune the generated image theme, decoy archive contents, or solver briefing while keeping the append-and-carve solve path intact.",
+    "doNotDoYet": "Do not expose the real flag in plaintext metadata or portal frontend files."
   }
 }

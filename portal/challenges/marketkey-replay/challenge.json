@@ -1,50 +1,51 @@
 {
   "id": "marketkey-replay",
   "sortOrder": 5,
-  "title": "MarketKey Replay",
+  "title": "Mailbox Heist",
   "status": "concept",
   "category": "Web / Application Forensics",
   "difficulty": "Hard",
   "points": 300,
-  "summary": "An Android access-token generator must be decompiled to reproduce the suspect's login value for a specific date.",
-  "scenario": "Investigators seized an APK used by a marketplace operator to generate rotating daily access tokens. The suspect insists the token on the target date cannot be reproduced without the original phone. Students must reverse the app logic, recover the secret material, and calculate the exact token that unlocks the final flag.",
+  "summary": "An EML hides a compressed attachment that must be extracted from the raw message source.",
+  "scenario": "An email claims a vendor packet was resent as a bundled attachment. Solvers need to inspect the raw message, recover the MIME attachment without relying on a mail client, and extract the archived content to obtain the flag.",
   "recommendedTools": [
-    "jadx",
-    "apktool",
-    "python3"
+    "python3",
+    "base64",
+    "grep",
+    "unzip"
   ],
   "learningObjectives": [
-    "Extract token-generation logic from a mobile application",
-    "Reproduce a date-driven credential outside the original runtime"
+    "Recover a binary attachment from a raw email artifact",
+    "Inspect a recovered archive without relying on GUI mail tools"
   ],
   "artifacts": [
     {
-      "name": "MarketKey.apk",
-      "purpose": "Primary application to decompile and analyze"
+      "name": "target_<seed>.eml",
+      "purpose": "Generated email artifact containing an archived attachment"
     },
     {
-      "name": "timeline.txt",
-      "purpose": "Case note with the date the token must match"
+      "name": "triage_note.txt",
+      "purpose": "Short analyst note describing the suspicious message"
     }
   ],
   "hints": [
-    "Search the decompiled code for date formatting and crypto primitives.",
-    "The final answer should come from recreating the token logic, not brute force."
+    "The useful evidence is in the attachment, not the visible message body.",
+    "Treat the EML as structured source data, not just something to open in a mail client."
   ],
   "sourceNotes": [
-    "Notes_CyberForensics/Exam2Notes/apk_challenge.md"
+    "Notes_CyberForensics/email_eml_info.py"
   ],
   "deployment": {
-    "kind": "apk-analysis",
+    "kind": "email-analysis",
     "composeFile": null,
     "launchUrl": null
   },
   "flagValidation": {
-    "sha256": "cf3a6fbcc68e8b450e20eae41266ef0cd3f4dfd74bd2392761bcc26d3e0fbb3a"
+    "sha256": "827e9a876d9c8cfe8f666428c7f260252b7cf4bdb8fcd7a7b4686e9b07fe3a74"
   },
   "llmHandoff": {
-    "scope": "All app samples, helper scripts, and solution notes should stay inside this folder.",
-    "implementNext": "Create or adapt an APK where the token algorithm can be recovered statically and replayed for one target date.",
-    "doNotDoYet": "Do not add server-side validation unless the challenge is intentionally expanded into a live service."
+    "scope": "This folder contains the metadata, generator, and internal notes for the challenge.",
+    "implementNext": "Tune the email narrative, attachment naming, or extraction hints while preserving the raw-message solve path.",
+    "doNotDoYet": "Do not expose the attachment contents or real flag in plaintext portal assets."
   }
 }

@@ -1,13 +1,16 @@
-# MarketKey Replay
+# Mailbox Heist
 
 ## Concept
-Student-facing mobile application challenge where solvers decompile an APK and reproduce a daily token.
+Student-facing email forensics challenge where solvers recover a ZIP attachment from a raw `.eml` artifact.
 
 ## Intended Solver Path
-1. Decompile the APK.
-2. Recover the date logic and secret material.
-3. Recreate the token for the target date and use it to form the flag.
+1. Inspect the raw email structure.
+2. Recover the archived attachment from the MIME message.
+3. Extract the attachment and inspect the recovered draft.
 
 ## Suggested Student Files
-- `MarketKey.apk`
-- `timeline.txt`
+- `target_<seed>.eml`
+- `triage_note.txt`
+
+## Generator
+Run `generate.py` to create the solver bundle for this challenge.

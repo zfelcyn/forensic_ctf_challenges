@@ -1,11 +1,11 @@
-# MarketKey Replay Handoff
+# Mailbox Heist Handoff
 
 Scope: Implement only this folder.
 
 Build target:
-1. Ship one APK with recoverable static logic.
-2. Require a solver to calculate the token for one specific date.
-3. Keep the reverse-engineering path deterministic and solvable with common course tools.
+1. Generate one realistic `.eml` artifact with a recoverable archived attachment.
+2. Require a solver to recover the MIME attachment before extracting the flag.
+3. Keep the solve path deterministic and solvable with common course tools.
 
 Keep unchanged:
 - Portal-wide schema

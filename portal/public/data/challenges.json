@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-02T18:21:10.574991+00:00",
+  "generatedAt": "2026-04-02T19:06:55.859626+00:00",
   "challengeCount": 5,
   "categories": [
     "Anti-Forensics Techniques",
@@ -17,12 +17,13 @@
       "category": "Steganography",
       "difficulty": "Easy",
       "points": 100,
-      "summary": "A retreat photo looks normal until the bytes after the JPEG footer are inspected.",
-      "scenario": "An employee under review sent one final image to the team chat before their laptop was seized. The picture itself is harmless, but the file structure suggests it was used as a dead-drop for a plaintext confession. Students should inspect the image footer, recover the appended payload, and extract the hidden flag.",
+      "summary": "A retreat photo hides a compressed evidence bundle after the real JPEG footer.",
+      "scenario": "An employee retreat photo looks ordinary at first glance, but the file still carries hidden bytes beyond the legitimate image end marker. Solvers need to confirm where the JPEG actually ends, carve the appended payload, and extract the recovered evidence package to obtain the flag.",
       "recommendedTools": [
         "xxd",
-        "hex editor",
-        "strings"
+        "binwalk",
+        "dd",
+        "unzip"
       ],
       "learningObjectives": [
         "Recognize valid JPEG end markers",
@@ -30,12 +31,12 @@
       ],
       "artifacts": [
         {
-          "name": "retreat_photo.jpg",
-          "purpose": "Primary image containing appended hidden data"
+          "name": "retreat_photo_<seed>.jpg",
+          "purpose": "Generated JPEG with an appended archive payload"
         },
         {
           "name": "briefing.txt",
-          "purpose": "Short case note handed to solvers"
+          "purpose": "Case note handed to solvers"
         }
       ],
       "hints": [
@@ -54,15 +55,17 @@
         "sha256": "839413da4fdc8393a00217ba3cc95a51d743d4b1845c26ee0855e70defd27cbd"
       },
       "llmHandoff": {
-        "scope": "Only this folder should be needed to build the final challenge bundle.",
-        "implementNext": "Create a believable JPEG and append either plaintext or lightly encoded text after the real FFD9 footer.",
-        "doNotDoYet": "Do not change the portal UI or create cross-folder dependencies."
+        "scope": "This folder contains the metadata, generator, and internal notes for the challenge.",
+        "implementNext": "Tune the generated image theme, decoy archive contents, or solver briefing while keeping the append-and-carve solve path intact.",
+        "doNotDoYet": "Do not expose the real flag in plaintext metadata or portal frontend files."
       },
       "difficultyStars": 1,
       "paths": {
         "folder": "challenges/carbon-offset",
-        "manifest": "challenges/carbon-offset/challenge.json"
-      }
+        "manifest": "challenges/carbon-offset/challenge.json",
+        "generator": "challenges/carbon-offset/generate.py"
+      },
+      "downloadPath": "/api/challenges/carbon-offset/download"
     },
     {
       "id": "ledger-burn",
@@ -72,12 +75,13 @@
       "category": "Anti-Forensics Techniques",
       "difficulty": "Medium",
       "points": 200,
-      "summary": "A valid ZIP archive was padded with a hidden payload after its official end-of-directory record.",
-      "scenario": "Finance exported a payroll archive right before a workstation wipe. The ZIP opens normally, but a forensic review shows the file extends well beyond the expected archive boundary. Students must identify where the archive truly ends, carve the appended payload, and recover the flag from the concealed object.",
+      "summary": "A finance ZIP is padded with a hidden compressed payload after its official end-of-directory record.",
+      "scenario": "A valid ZIP archive opens normally, but the raw file length exceeds what the ZIP metadata says it should contain. Solvers must use the central directory information to locate the real archive end, carve the trailing payload, and decompress the hidden evidence.",
       "recommendedTools": [
         "zipinfo",
         "dd",
-        "binwalk"
+        "file",
+        "gunzip"
       ],
       "learningObjectives": [
         "Validate archive metadata against raw file length",
@@ -85,8 +89,8 @@
       ],
       "artifacts": [
         {
-          "name": "quarter_close.zip",
-          "purpose": "Primary archive with hidden data appended after EOCD"
+          "name": "quarter_close_<seed>.zip",
+          "purpose": "Generated archive with a hidden compressed tail"
         },
         {
           "name": "audit_note.txt",
@@ -109,15 +113,17 @@
         "sha256": "8a123c96eb2976a5fe8183f277b448a6efe13e6ab43b5bf8058ad35d846325f6"
       },
       "llmHandoff": {
-        "scope": "Implement the challenge entirely inside this folder and keep the archive self-contained.",
-        "implementNext": "Create a clean ZIP, append a second file type after the EOCD, and document the exact carve offsets in the internal solution.",
-        "doNotDoYet": "Do not add extra stego layers unless the team explicitly wants a higher difficulty."
+        "scope": "This folder contains the metadata, generator, and internal notes for the challenge.",
+        "implementNext": "Tune the visible finance records, trailing compressed payload, or difficulty hints while keeping the EOCD carve workflow intact.",
+        "doNotDoYet": "Do not replace the trailing payload with plaintext data."
       },
       "difficultyStars": 2,
       "paths": {
         "folder": "challenges/ledger-burn",
-        "manifest": "challenges/ledger-burn/challenge.json"
-      }
+        "manifest": "challenges/ledger-burn/challenge.json",
+        "generator": "challenges/ledger-burn/generate.py"
+      },
+      "downloadPath": "/api/challenges/ledger-burn/download"
     },
     {
       "id": "template-bleed",
@@ -127,11 +133,12 @@
       "category": "File System Forensics",
       "difficulty": "Medium",
       "points": 200,
-      "summary": "A DOCX review packet leaks evidence through embedded media and leftover office package internals.",
-      "scenario": "HR exported a disciplinary report as a DOCX and claimed the original evidence had been removed. A closer look at the Office container reveals that the package still holds media artifacts that were not meant to survive distribution. Students should unpack the document, inspect its internal structure, and recover the hidden flag from an embedded file.",
+      "summary": "A DOCX review packet leaks evidence through an embedded media artifact hidden inside the package.",
+      "scenario": "A DOCX review package appears ordinary at first glance, but one of its internal media objects still contains concealed bytes from an earlier draft. Solvers need to unpack the Office container, locate the suspicious media file, and carve the hidden payload from that embedded object.",
       "recommendedTools": [
         "unzip",
         "find",
+        "xxd",
         "binwalk"
       ],
       "learningObjectives": [
@@ -140,8 +147,8 @@
       ],
       "artifacts": [
         {
-          "name": "performance_review.docx",
-          "purpose": "Primary Office document with hidden evidence in package contents"
+          "name": "performance_review_<seed>.docx",
+          "purpose": "Generated Office package containing a suspicious media object"
         },
         {
           "name": "case_summary.txt",
@@ -164,15 +171,17 @@
         "sha256": "6c76064f437600629cf426e7e684cf757c6198a3f7dab1ae4a702843c811423e"
       },
       "llmHandoff": {
-        "scope": "Keep all challenge files and solution notes isolated to this folder.",
-        "implementNext": "Build a DOCX with plausible business content and hide the real clue in an embedded image or media object inside the package.",
-        "doNotDoYet": "Do not turn this into a deleted-file recovery challenge unless the course scope changes."
+        "scope": "This folder contains the metadata, generator, and internal notes for the challenge.",
+        "implementNext": "Tune the visible document text, embedded media naming, or nested payload while preserving the package-inspection solve path.",
+        "doNotDoYet": "Do not make the hidden evidence directly readable from the outer DOCX bytes."
       },
       "difficultyStars": 2,
       "paths": {
         "folder": "challenges/template-bleed",
-        "manifest": "challenges/template-bleed/challenge.json"
-      }
+        "manifest": "challenges/template-bleed/challenge.json",
+        "generator": "challenges/template-bleed/generate.py"
+      },
+      "downloadPath": "/api/challenges/template-bleed/download"
     },
     {
       "id": "graveyard-transfer",
@@ -182,12 +191,13 @@
       "category": "Network Forensics",
       "difficulty": "Hard",
       "points": 300,
-      "summary": "A late-night FTP session moved more than it should have, and the useful evidence is buried in the data stream.",
-      "scenario": "A contractor claimed they only uploaded harmless logs during a night shift. The packet capture shows an FTP control session plus a short-lived high-numbered data connection that transferred a suspicious file. Students must reconstruct the transferred object from the capture, inspect the recovered payload, and identify the embedded flag.",
+      "summary": "An FTP packet capture hides the real evidence in a passive-mode data stream.",
+      "scenario": "An FTP retrieval looks routine until the passive-mode data connection is reconstructed. Solvers need to identify the correct data stream, recover the transferred archive, and inspect the recovered files to obtain the flag.",
       "recommendedTools": [
         "Wireshark",
         "Follow TCP Stream",
-        "strings"
+        "Export",
+        "unzip"
       ],
       "learningObjectives": [
         "Map control traffic to a separate FTP data channel",
@@ -195,8 +205,8 @@
       ],
       "artifacts": [
         {
-          "name": "graveyard_transfer.pcap",
-          "purpose": "Primary network capture containing control and data streams"
+          "name": "graveyard_transfer_<seed>.pcap",
+          "purpose": "Generated packet capture with control and passive-mode data streams"
         },
         {
           "name": "incident_memo.txt",
@@ -219,70 +229,75 @@
         "sha256": "12245be17bac69dbab440e0c316435c4a1cb179b1226dda56602419b371b38d2"
       },
       "llmHandoff": {
-        "scope": "This folder should contain the full PCAP-based challenge bundle and solution notes.",
-        "implementNext": "Generate a realistic FTP capture where the flag is only recoverable after reconstructing the transferred artifact from the data channel.",
-        "doNotDoYet": "Do not require malware reversing beyond simple strings or metadata unless difficulty is intentionally raised."
+        "scope": "This folder contains the metadata, generator, and internal notes for the challenge.",
+        "implementNext": "Tune the FTP story, credentials, or transferred decoy files while keeping the packet-reconstruction solve path intact.",
+        "doNotDoYet": "Do not put the flag directly into plaintext control-channel traffic."
       },
       "difficultyStars": 3,
       "paths": {
         "folder": "challenges/graveyard-transfer",
-        "manifest": "challenges/graveyard-transfer/challenge.json"
-      }
+        "manifest": "challenges/graveyard-transfer/challenge.json",
+        "generator": "challenges/graveyard-transfer/generate.py"
+      },
+      "downloadPath": "/api/challenges/graveyard-transfer/download"
     },
     {
       "id": "marketkey-replay",
       "sortOrder": 5,
-      "title": "MarketKey Replay",
+      "title": "Mailbox Heist",
       "status": "concept",
       "category": "Web / Application Forensics",
       "difficulty": "Hard",
       "points": 300,
-      "summary": "An Android access-token generator must be decompiled to reproduce the suspect's login value for a specific date.",
-      "scenario": "Investigators seized an APK used by a marketplace operator to generate rotating daily access tokens. The suspect insists the token on the target date cannot be reproduced without the original phone. Students must reverse the app logic, recover the secret material, and calculate the exact token that unlocks the final flag.",
+      "summary": "An EML hides a compressed attachment that must be extracted from the raw message source.",
+      "scenario": "An email claims a vendor packet was resent as a bundled attachment. Solvers need to inspect the raw message, recover the MIME attachment without relying on a mail client, and extract the archived content to obtain the flag.",
       "recommendedTools": [
-        "jadx",
-        "apktool",
-        "python3"
+        "python3",
+        "base64",
+        "grep",
+        "unzip"
       ],
       "learningObjectives": [
-        "Extract token-generation logic from a mobile application",
-        "Reproduce a date-driven credential outside the original runtime"
+        "Recover a binary attachment from a raw email artifact",
+        "Inspect a recovered archive without relying on GUI mail tools"
       ],
       "artifacts": [
         {
-          "name": "MarketKey.apk",
-          "purpose": "Primary application to decompile and analyze"
+          "name": "target_<seed>.eml",
+          "purpose": "Generated email artifact containing an archived attachment"
         },
         {
-          "name": "timeline.txt",
-          "purpose": "Case note with the date the token must match"
+          "name": "triage_note.txt",
+          "purpose": "Short analyst note describing the suspicious message"
         }
       ],
       "hints": [
-        "Search the decompiled code for date formatting and crypto primitives.",
-        "The final answer should come from recreating the token logic, not brute force."
+        "The useful evidence is in the attachment, not the visible message body.",
+        "Treat the EML as structured source data, not just something to open in a mail client."
       ],
       "sourceNotes": [
-        "Notes_CyberForensics/Exam2Notes/apk_challenge.md"
+        "Notes_CyberForensics/email_eml_info.py"
       ],
       "deployment": {
-        "kind": "apk-analysis",
+        "kind": "email-analysis",
         "composeFile": null,
         "launchUrl": null
       },
       "flagValidation": {
-        "sha256": "cf3a6fbcc68e8b450e20eae41266ef0cd3f4dfd74bd2392761bcc26d3e0fbb3a"
+        "sha256": "827e9a876d9c8cfe8f666428c7f260252b7cf4bdb8fcd7a7b4686e9b07fe3a74"
       },
       "llmHandoff": {
-        "scope": "All app samples, helper scripts, and solution notes should stay inside this folder.",
-        "implementNext": "Create or adapt an APK where the token algorithm can be recovered statically and replayed for one target date.",
-        "doNotDoYet": "Do not add server-side validation unless the challenge is intentionally expanded into a live service."
+        "scope": "This folder contains the metadata, generator, and internal notes for the challenge.",
+        "implementNext": "Tune the email narrative, attachment naming, or extraction hints while preserving the raw-message solve path.",
+        "doNotDoYet": "Do not expose the attachment contents or real flag in plaintext portal assets."
       },
       "difficultyStars": 3,
       "paths": {
         "folder": "challenges/marketkey-replay",
-        "manifest": "challenges/marketkey-replay/challenge.json"
-      }
+        "manifest": "challenges/marketkey-replay/challenge.json",
+        "generator": "challenges/marketkey-replay/generate.py"
+      },
+      "downloadPath": "/api/challenges/marketkey-replay/download"
     }
   ]
 }

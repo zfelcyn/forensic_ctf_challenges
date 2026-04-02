@@ -74,11 +74,17 @@ def load_manifest(path: Path) -> dict[str, Any]:
     ):
         raise ValueError(f"{path}: flagValidation.sha256 must be a 64-character lowercase hex digest")
 
+    generator_script = path.parent / "generate.py"
+    if not generator_script.exists():
+        raise ValueError(f"{path}: missing generator script at {generator_script}")
+
     data["difficultyStars"] = DIFFICULTY_STARS[difficulty]
     data["paths"] = {
         "folder": path.parent.relative_to(ROOT).as_posix(),
         "manifest": path.relative_to(ROOT).as_posix(),
+        "generator": generator_script.relative_to(ROOT).as_posix(),
     }
+    data["downloadPath"] = f"/api/challenges/{data['id']}/download"
     return data
 
 

@@ -6,11 +6,12 @@
   "category": "File System Forensics",
   "difficulty": "Medium",
   "points": 200,
-  "summary": "A DOCX review packet leaks evidence through embedded media and leftover office package internals.",
-  "scenario": "HR exported a disciplinary report as a DOCX and claimed the original evidence had been removed. A closer look at the Office container reveals that the package still holds media artifacts that were not meant to survive distribution. Students should unpack the document, inspect its internal structure, and recover the hidden flag from an embedded file.",
+  "summary": "A DOCX review packet leaks evidence through an embedded media artifact hidden inside the package.",
+  "scenario": "A DOCX review package appears ordinary at first glance, but one of its internal media objects still contains concealed bytes from an earlier draft. Solvers need to unpack the Office container, locate the suspicious media file, and carve the hidden payload from that embedded object.",
   "recommendedTools": [
     "unzip",
     "find",
+    "xxd",
     "binwalk"
   ],
   "learningObjectives": [
@@ -19,8 +20,8 @@
   ],
   "artifacts": [
     {
-      "name": "performance_review.docx",
-      "purpose": "Primary Office document with hidden evidence in package contents"
+      "name": "performance_review_<seed>.docx",
+      "purpose": "Generated Office package containing a suspicious media object"
     },
     {
       "name": "case_summary.txt",
@@ -43,8 +44,8 @@
     "sha256": "6c76064f437600629cf426e7e684cf757c6198a3f7dab1ae4a702843c811423e"
   },
   "llmHandoff": {
-    "scope": "Keep all challenge files and solution notes isolated to this folder.",
-    "implementNext": "Build a DOCX with plausible business content and hide the real clue in an embedded image or media object inside the package.",
-    "doNotDoYet": "Do not turn this into a deleted-file recovery challenge unless the course scope changes."
+    "scope": "This folder contains the metadata, generator, and internal notes for the challenge.",
+    "implementNext": "Tune the visible document text, embedded media naming, or nested payload while preserving the package-inspection solve path.",
+    "doNotDoYet": "Do not make the hidden evidence directly readable from the outer DOCX bytes."
   }
 }

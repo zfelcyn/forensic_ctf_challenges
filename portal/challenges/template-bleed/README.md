@@ -9,5 +9,8 @@ Student-facing Office document challenge where embedded package contents still l
 3. Recover the hidden media object and extract the flag.
 
 ## Suggested Student Files
-- `performance_review.docx`
+- `performance_review_<seed>.docx`
 - `case_summary.txt`
+
+## Generator
+Run `generate.py` to create the solver bundle for this challenge.

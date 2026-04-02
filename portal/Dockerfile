@@ -1,16 +1,13 @@
-FROM python:3.12-alpine AS builder
+FROM python:3.12-slim
 
 WORKDIR /app
 
-COPY challenges ./challenges
-COPY public ./public
-COPY scripts ./scripts
+COPY requirements.txt ./requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
+COPY . .
 RUN python3 scripts/build_registry.py
 
-FROM nginx:1.27-alpine
-
-COPY nginx/default.conf /etc/nginx/conf.d/default.conf
-COPY --from=builder /app/public /usr/share/nginx/html
-
 EXPOSE 8080
+
+CMD ["python3", "server.py", "--host", "0.0.0.0", "--port", "8080"]

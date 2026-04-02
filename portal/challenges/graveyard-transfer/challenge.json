@@ -6,12 +6,13 @@
   "category": "Network Forensics",
   "difficulty": "Hard",
   "points": 300,
-  "summary": "A late-night FTP session moved more than it should have, and the useful evidence is buried in the data stream.",
-  "scenario": "A contractor claimed they only uploaded harmless logs during a night shift. The packet capture shows an FTP control session plus a short-lived high-numbered data connection that transferred a suspicious file. Students must reconstruct the transferred object from the capture, inspect the recovered payload, and identify the embedded flag.",
+  "summary": "An FTP packet capture hides the real evidence in a passive-mode data stream.",
+  "scenario": "An FTP retrieval looks routine until the passive-mode data connection is reconstructed. Solvers need to identify the correct data stream, recover the transferred archive, and inspect the recovered files to obtain the flag.",
   "recommendedTools": [
     "Wireshark",
     "Follow TCP Stream",
-    "strings"
+    "Export",
+    "unzip"
   ],
   "learningObjectives": [
     "Map control traffic to a separate FTP data channel",
@@ -19,8 +20,8 @@
   ],
   "artifacts": [
     {
-      "name": "graveyard_transfer.pcap",
-      "purpose": "Primary network capture containing control and data streams"
+      "name": "graveyard_transfer_<seed>.pcap",
+      "purpose": "Generated packet capture with control and passive-mode data streams"
     },
     {
       "name": "incident_memo.txt",
@@ -43,8 +44,8 @@
     "sha256": "12245be17bac69dbab440e0c316435c4a1cb179b1226dda56602419b371b38d2"
   },
   "llmHandoff": {
-    "scope": "This folder should contain the full PCAP-based challenge bundle and solution notes.",
-    "implementNext": "Generate a realistic FTP capture where the flag is only recoverable after reconstructing the transferred artifact from the data channel.",
-    "doNotDoYet": "Do not require malware reversing beyond simple strings or metadata unless difficulty is intentionally raised."
+    "scope": "This folder contains the metadata, generator, and internal notes for the challenge.",
+    "implementNext": "Tune the FTP story, credentials, or transferred decoy files while keeping the packet-reconstruction solve path intact.",
+    "doNotDoYet": "Do not put the flag directly into plaintext control-channel traffic."
   }
 }

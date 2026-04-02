@@ -9,5 +9,8 @@ Student-facing steganography challenge based on a normal-looking JPEG with appen
 3. Recover the appended payload and extract the flag.
 
 ## Suggested Student Files
-- `retreat_photo.jpg`
+- `retreat_photo_<seed>.jpg`
 - `briefing.txt`
+
+## Generator
+Run `generate.py` to create the solver bundle for this challenge.

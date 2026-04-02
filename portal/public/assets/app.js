@@ -108,6 +108,11 @@ function renderDetail(challenges) {
           <span class="meta-label">${isSolved ? "Solved" : "Unsolved"}</span>
         </div>
 
+        <div class="action-row">
+          <a class="download-button" href="${escapeHtml(challenge.downloadPath)}">Download Files</a>
+          <span class="download-note">Download the files needed for this challenge.</span>
+        </div>
+
         <p class="challenge-scenario">${escapeHtml(challenge.scenario)}</p>
 
         <section class="window-section">

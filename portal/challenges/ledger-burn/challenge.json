@@ -6,12 +6,13 @@
   "category": "Anti-Forensics Techniques",
   "difficulty": "Medium",
   "points": 200,
-  "summary": "A valid ZIP archive was padded with a hidden payload after its official end-of-directory record.",
-  "scenario": "Finance exported a payroll archive right before a workstation wipe. The ZIP opens normally, but a forensic review shows the file extends well beyond the expected archive boundary. Students must identify where the archive truly ends, carve the appended payload, and recover the flag from the concealed object.",
+  "summary": "A finance ZIP is padded with a hidden compressed payload after its official end-of-directory record.",
+  "scenario": "A valid ZIP archive opens normally, but the raw file length exceeds what the ZIP metadata says it should contain. Solvers must use the central directory information to locate the real archive end, carve the trailing payload, and decompress the hidden evidence.",
   "recommendedTools": [
     "zipinfo",
     "dd",
-    "binwalk"
+    "file",
+    "gunzip"
   ],
   "learningObjectives": [
     "Validate archive metadata against raw file length",
@@ -19,8 +20,8 @@
   ],
   "artifacts": [
     {
-      "name": "quarter_close.zip",
-      "purpose": "Primary archive with hidden data appended after EOCD"
+      "name": "quarter_close_<seed>.zip",
+      "purpose": "Generated archive with a hidden compressed tail"
     },
     {
       "name": "audit_note.txt",
@@ -43,8 +44,8 @@
     "sha256": "8a123c96eb2976a5fe8183f277b448a6efe13e6ab43b5bf8058ad35d846325f6"
   },
   "llmHandoff": {
-    "scope": "Implement the challenge entirely inside this folder and keep the archive self-contained.",
-    "implementNext": "Create a clean ZIP, append a second file type after the EOCD, and document the exact carve offsets in the internal solution.",
-    "doNotDoYet": "Do not add extra stego layers unless the team explicitly wants a higher difficulty."
+    "scope": "This folder contains the metadata, generator, and internal notes for the challenge.",
+    "implementNext": "Tune the visible finance records, trailing compressed payload, or difficulty hints while keeping the EOCD carve workflow intact.",
+    "doNotDoYet": "Do not replace the trailing payload with plaintext data."
   }
 }

@@ -298,6 +298,37 @@ h1 {
   margin: 1rem 0 1.3rem;
 }
 
+.action-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.25rem;
+}
+
+.download-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 13rem;
+  padding: 0.78rem 1rem;
+  border-radius: 0.55rem;
+  border: 1px solid rgba(181, 242, 73, 0.75);
+  background: rgba(181, 242, 73, 0.08);
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.download-button:hover {
+  background: rgba(181, 242, 73, 0.14);
+}
+
+.download-note {
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
 .badge,
 .meta-label,
 .meta-chip {
