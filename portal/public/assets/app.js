@@ -2,6 +2,7 @@ const state = {
   challenges: [],
   selectedId: null,
   solvedIds: new Set(),
+  windowMode: "normal",
 };
 
 const STORAGE_KEY = "forensic-ctf-portal-progress-v1";
@@ -52,10 +53,12 @@ function renderMetrics(challenges) {
 
 function render() {
   if (!state.challenges.some((item) => item.id === state.selectedId)) {
-    state.selectedId = getDefaultChallengeId(state.challenges);
+    state.selectedId = null;
+    state.windowMode = "normal";
   }
 
   renderMetrics(state.challenges);
+  syncWindowMode();
   renderTree(state.challenges);
   renderDetail(state.challenges);
 }
@@ -82,16 +85,16 @@ function renderDetail(challenges) {
     .join("");
 
   detailPanel.innerHTML = `
-    <article class="challenge-window">
+    <article class="challenge-window ${state.windowMode === "minimized" ? "minimized" : ""}">
       <div class="window-bar">
         <div class="window-tabs">
           <span class="tab active">Challenge</span>
           <span class="tab">${isSolved ? "Solved" : "Open"}</span>
         </div>
         <div class="window-controls" aria-hidden="true">
-          <span class="dot red"></span>
-          <span class="dot yellow"></span>
-          <span class="dot green"></span>
+          <button type="button" class="window-button red" data-window-action="close" title="Close challenge"></button>
+          <button type="button" class="window-button yellow" data-window-action="minimize" title="Minimize challenge"></button>
+          <button type="button" class="window-button green ${state.windowMode === "focus" ? "active" : ""}" data-window-action="focus" title="Focus challenge"></button>
         </div>
       </div>
 
@@ -184,6 +187,31 @@ function renderDetail(challenges) {
     }
     render();
   });
+
+  detailPanel.querySelectorAll("[data-window-action]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const action = button.getAttribute("data-window-action");
+
+      if (action === "close") {
+        state.selectedId = null;
+        state.windowMode = "normal";
+        clearChallengeHash();
+        render();
+        return;
+      }
+
+      if (action === "minimize") {
+        state.windowMode = state.windowMode === "minimized" ? "normal" : "minimized";
+        render();
+        return;
+      }
+
+      if (action === "focus") {
+        state.windowMode = state.windowMode === "focus" ? "normal" : "focus";
+        render();
+      }
+    });
+  });
 }
 
 function getRequestedIdFromHash() {
@@ -234,6 +262,7 @@ function renderTree(challenges) {
 
         button.addEventListener("click", () => {
           state.selectedId = challenge.id;
+          state.windowMode = "normal";
           window.location.hash = `challenge/${challenge.id}`;
           render();
         });
@@ -278,6 +307,18 @@ function persistSolvedIds() {
   );
 }
 
+function syncWindowMode() {
+  const hasSelection = Boolean(state.selectedId);
+  detailPanel.classList.toggle("window-focused", hasSelection && state.windowMode === "focus");
+  detailPanel.classList.toggle("window-minimized", hasSelection && state.windowMode === "minimized");
+  document.body.classList.toggle("challenge-focus-active", hasSelection && state.windowMode === "focus");
+}
+
+function clearChallengeHash() {
+  const cleanPath = `${window.location.pathname}${window.location.search}`;
+  window.history.replaceState(null, "", cleanPath);
+}
+
 async function validateFlag(input, expectedDigest) {
   const encoded = new TextEncoder().encode(input);
   const digestBuffer = await window.crypto.subtle.digest("SHA-256", encoded);
@@ -300,6 +341,23 @@ window.addEventListener("hashchange", () => {
   const requestedId = getRequestedIdFromHash();
   if (requestedId) {
     state.selectedId = requestedId;
+    state.windowMode = "normal";
+    render();
+    return;
+  }
+
+  state.selectedId = null;
+  state.windowMode = "normal";
+  render();
+});
+
+window.addEventListener("keydown", (event) => {
+  if (event.key !== "Escape") {
+    return;
+  }
+
+  if (state.windowMode === "focus") {
+    state.windowMode = "normal";
     render();
   }
 });
