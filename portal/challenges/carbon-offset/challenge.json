@@ -41,7 +41,7 @@
     "launchUrl": null
   },
   "flagValidation": {
-    "sha256": "839413da4fdc8393a00217ba3cc95a51d743d4b1845c26ee0855e70defd27cbd"
+    "sha256": "3604c16e86007cf3c07f8de6c60fc2a096308282ffa7aadae0cc43849710e5be"
   },
   "llmHandoff": {
     "scope": "This folder contains the metadata, generator, and internal notes for the challenge.",
