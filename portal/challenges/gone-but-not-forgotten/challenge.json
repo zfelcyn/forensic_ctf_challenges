@@ -1,0 +1,46 @@
+{
+  "id": "GBNF",
+  "sortOrder": 99,
+  "title": "Gone But Not Forgotten",
+  "status": "concept",
+  "category": "File System Forensics",
+  "difficulty": "Medium",
+  "points": 100,
+  "summary": "Find the secret flag within this extracted .img file.",
+  "scenario": "I stole this computer from someone, but they deleted the one file I needed from them. Find it for me.",
+  "recommendedTools": [
+    "foremost",
+    "autopsy"
+  ],
+  "learningObjectives": [
+    "File System Forensics",
+    "Learn the foremost and/or autopsy tool"
+  ],
+  "artifacts": [
+    {
+      "name": "laptop.img",
+      "purpose": "The .img file that students must forensically analyze to get the secret flag."
+    }
+  ],
+  "hints": [
+    "Carve with foremost where -i is input and -o is output",
+    "Mount the .img to Autopsy and browse the file treetree",
+    "If you really hated using Autopsy or Foremost, just string it"
+  ],
+  "sourceNotes": [
+    "Notes_CyberForensics/path/to/source-note.md"
+  ],
+  "deployment": {
+    "kind": "file-drop",
+    "composeFile": null,
+    "launchUrl": null
+  },
+  "flagValidation": {
+    "sha256": "9a2369c7436c8195bf202cd7038d052f2fa61bc017252469a27cc8a32ed5ba1e"
+  },
+  "llmHandoff": {
+    "scope": "This folder is the full scope for the challenge.",
+    "implementNext": "Replace placeholder artifacts and write the real challenge files.",
+    "doNotDoYet": "Do not touch the portal frontend unless the challenge schema changes."
+  }
+}
