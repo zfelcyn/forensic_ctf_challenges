@@ -1,3 +1,11 @@
+## Team Hackstreet Boys: Group 1
+
+Members:
+- Zachary Felcyn
+- Kyan Kotschevar-Smead
+- Noah Manuel
+- James Richards-Perhatch
+
 # forensic_ctf_challenges
 
 Creating Capture The Flag (CTF) challenges for classmates in CPTS 425.

@@ -6,8 +6,8 @@
   "category": "File System Forensics",
   "difficulty": "Medium",
   "points": 200,
-  "summary": "A DOCX review packet leaks evidence through an embedded media artifact hidden inside the package.",
-  "scenario": "A DOCX review package appears ordinary at first glance, but one of its internal media objects still contains concealed bytes from an earlier draft. Solvers need to unpack the Office container, locate the suspicious media file, and carve the hidden payload from that embedded object.",
+  "summary": "A mall incident DOCX about food-court sabotage still leaks a hidden draft asset tied to the Jamba Juice vs. Cinnabon feud.",
+  "scenario": "Kyan Kotschevar-Smead still works at Jamba Juice after leaking classified Boeing materials, and has been documenting repeated sabotage after James Richards-Perhatch from Cinnabon started poaching customers and interfering with orders. Mall management distributed a cleaned-up DOCX packet, but one embedded media object still contains a concealed draft archive from the original complaint. Solvers need to unpack the Office container, inspect the `word/media` assets, and carve the hidden payload to recover the flag.",
   "recommendedTools": [
     "unzip",
     "find",
@@ -20,17 +20,17 @@
   ],
   "artifacts": [
     {
-      "name": "performance_review_<seed>.docx",
-      "purpose": "Generated Office package containing a suspicious media object"
+      "name": "food_court_incident_<seed>.docx",
+      "purpose": "Generated Office package containing the mall-management incident packet and a suspicious media object"
     },
     {
-      "name": "case_summary.txt",
-      "purpose": "Background note framing the insider investigation"
+      "name": "mall_briefing.txt",
+      "purpose": "Background note framing the food-court sabotage investigation"
     }
   ],
   "hints": [
-    "A DOCX is not a single opaque file format.",
-    "Check the `word/` package contents before trying heavy carving."
+    "A DOCX is a ZIP package, not a single opaque blob.",
+    "Check `word/media` before assuming mall management removed every draft artifact."
   ],
   "sourceNotes": [
     "Notes_CyberForensics/Exam1Notes/file_carving.md"
@@ -41,11 +41,11 @@
     "launchUrl": null
   },
   "flagValidation": {
-    "sha256": "6c76064f437600629cf426e7e684cf757c6198a3f7dab1ae4a702843c811423e"
+    "sha256": "c3ddb9ad5eba840fdb4ab3dbc67d31743095250f687ac591f337b70637d06651"
   },
   "llmHandoff": {
     "scope": "This folder contains the metadata, generator, and internal notes for the challenge.",
-    "implementNext": "Tune the visible document text, embedded media naming, or nested payload while preserving the package-inspection solve path.",
+    "implementNext": "Tune the food-court complaint narrative, embedded media naming, or hidden archive contents while preserving the package-inspection solve path.",
     "doNotDoYet": "Do not make the hidden evidence directly readable from the outer DOCX bytes."
   }
 }
