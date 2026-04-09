@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-04-09T15:57:48.242642+00:00",
-  "challengeCount": 6,
+  "generatedAt": "2026-04-09T18:29:04.538613+00:00",
+  "challengeCount": 7,
   "categories": [
     "Bonus",
     "File System Forensics",
@@ -375,6 +375,57 @@
         "generator": "challenges/gone-but-not-forgotten/generate.py"
       },
       "downloadPath": "/api/challenges/gone-but-not-forgotten/download"
+    },
+    {
+      "id": "Password-Height",
+      "sortOrder": 99,
+      "title": "Password-Height",
+      "status": "concept",
+      "category": "Steganography",
+      "difficulty": "Medium",
+      "points": 100,
+      "summary": "Password is cropped when viewed.",
+      "scenario": "Your coworker doesn't like sending passwords over text, instead he texts you a picture of them. This last image he sent is cropped to only reveal part of the password. Reveal the full password to secure your flag.",
+      "recommendedTools": [
+        "vsCode Hexeditor"
+      ],
+      "learningObjectives": [
+        "Learn about JPEG formatting",
+        "Learn about edit file hex values"
+      ],
+      "artifacts": [
+        {
+          "name": "heightLimit.jpg",
+          "purpose": "Image containing password"
+        }
+      ],
+      "hints": [
+        "The hex of jpeg can restrict an image to display less information then is actually stored in it.",
+        "Look up the definition for a JPEG SOF0 header."
+      ],
+      "sourceNotes": [
+        "Notes_CyberForensics/path/to/source-note.md"
+      ],
+      "deployment": {
+        "kind": "file-drop",
+        "composeFile": null,
+        "launchUrl": null
+      },
+      "flagValidation": {
+        "sha256": "8c6fb1e9e37a1aea1d308c785192e1a17d71cef08c7f50a68d2e0ab292b2e7f4"
+      },
+      "llmHandoff": {
+        "scope": "This folder is the full scope for the challenge.",
+        "implementNext": "Replace placeholder artifacts and write the real challenge files.",
+        "doNotDoYet": "Do not touch the portal frontend unless the challenge schema changes."
+      },
+      "difficultyStars": 2,
+      "paths": {
+        "folder": "challenges/Password-Height",
+        "manifest": "challenges/Password-Height/challenge.json",
+        "generator": "challenges/Password-Height/generate.py"
+      },
+      "downloadPath": "/api/challenges/Password-Height/download"
     }
   ]
 }
