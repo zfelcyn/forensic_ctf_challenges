@@ -1,34 +1,39 @@
 {
-  "id": "GBNF",
+  "id": "gone-but-not-forgotten",
   "sortOrder": 99,
   "title": "Gone But Not Forgotten",
   "status": "concept",
   "category": "File System Forensics",
   "difficulty": "Medium",
   "points": 100,
-  "summary": "Find the secret flag within this extracted .img file.",
-  "scenario": "I stole this computer from someone, but they deleted the one file I needed from them. Find it for me.",
+  "summary": "A disk image still contains a deleted note, and the flag is recoverable with basic filesystem forensics.",
+  "scenario": "Investigators seized a laptop image after a suspect tried to remove a sensitive text file before the handoff. The visible files are mostly noise, but the deleted data is still recoverable. Solvers need to inspect the image with forensic tooling, recover the deleted note, and submit the flag it contains.",
   "recommendedTools": [
+    "strings",
     "foremost",
     "autopsy"
   ],
   "learningObjectives": [
-    "File System Forensics",
-    "Learn the foremost and/or autopsy tool"
+    "Recover deleted evidence from a raw disk image",
+    "Compare quick triage with deeper filesystem analysis tools"
   ],
   "artifacts": [
     {
+      "name": "README_FIRST.txt",
+      "purpose": "Introductory case note explaining the investigation goal"
+    },
+    {
       "name": "laptop.img",
-      "purpose": "The .img file that students must forensically analyze to get the secret flag."
+      "purpose": "Disk image containing a deleted text file with the flag"
     }
   ],
   "hints": [
-    "Carve with foremost where -i is input and -o is output",
-    "Mount the .img to Autopsy and browse the file treetree",
-    "If you really hated using Autopsy or Foremost, just string it"
+    "Start with a quick strings pass before moving to heavier forensic tooling.",
+    "If you load the image in Autopsy, inspect deleted content instead of only allocated files.",
+    "Carving tools can recover content even after a file is deleted."
   ],
   "sourceNotes": [
-    "Notes_CyberForensics/path/to/source-note.md"
+    "Notes_CyberForensics/Exam1Notes/file_carving.md"
   ],
   "deployment": {
     "kind": "file-drop",
@@ -36,11 +41,11 @@
     "launchUrl": null
   },
   "flagValidation": {
-    "sha256": "9a2369c7436c8195bf202cd7038d052f2fa61bc017252469a27cc8a32ed5ba1e"
+    "sha256": "f38c6f9facdb788cf84e5de3eb7642b95ffb572247018ab01d6c6dd642e37649"
   },
   "llmHandoff": {
-    "scope": "This folder is the full scope for the challenge.",
-    "implementNext": "Replace placeholder artifacts and write the real challenge files.",
-    "doNotDoYet": "Do not touch the portal frontend unless the challenge schema changes."
+    "scope": "This folder contains the full challenge definition, image asset, generator, and internal notes.",
+    "implementNext": "Improve the disk image realism, add decoy deleted files, or expand the solution notes while keeping the solve path centered on recovering a deleted text artifact.",
+    "doNotDoYet": "Do not expose the flag in plaintext metadata or move challenge assets outside this folder."
   }
 }

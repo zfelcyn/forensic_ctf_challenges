@@ -60,6 +60,13 @@ def load_manifest(path: Path) -> dict[str, Any]:
     if status not in VALID_STATUSES:
         raise ValueError(f"{path}: invalid status '{status}'")
 
+    challenge_id = data["id"]
+    folder_name = path.parent.name
+    if challenge_id != folder_name:
+        raise ValueError(
+            f"{path}: id '{challenge_id}' must match challenge folder name '{folder_name}'"
+        )
+
     points = data["points"]
     if not isinstance(points, int) or points <= 0:
         raise ValueError(f"{path}: points must be a positive integer")

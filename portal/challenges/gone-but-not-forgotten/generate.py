@@ -10,35 +10,29 @@ sys.path.append(str(Path(__file__).resolve().parents[2] / "scripts"))
 
 from challenge_utils import bundle_readme, ensure_output_dir, parse_common_args, seeded_rng, write_text
 
-ASSETS_DIRECTORY = Path(__file__).resolve().parent/"assets"
+ASSETS_DIRECTORY = Path(__file__).resolve().parent / "assets"
 
 def main() -> int:
     args = parse_common_args("Generate the GBNF bundle.")
     seed, _rng = seeded_rng(args.seed)
     output_dir = ensure_output_dir(args.output_dir)
 
-    # README_FIRST.txt
     write_text(
         output_dir / "README_FIRST.txt",
         bundle_readme(
-            "Gone but not forgotten",
-            "Browse the files within the disk image to find a secret file someone tried to delete.",
+            "Gone But Not Forgotten",
+            "Recover the deleted note hidden inside the disk image and extract the flag it contains.",
             seed,
-            ["strings"],
+            ["strings", "foremost", "Autopsy"],
             [
-                "Open the file using Autopsy",
-                "Browse the recovered files.",
-                "I get the secret back.",
+                "Start with quick triage against the raw image.",
+                "Inspect deleted content or carve recoverable files from the image.",
+                "Open the recovered note and submit the flag.",
             ],
         ),
     )
 
-
-    # Add disk image
-    shutil.copy(
-        ASSETS_DIRECTORY / "laptop.img",
-        output_dir / "laptop.img"
-    )
+    shutil.copy(ASSETS_DIRECTORY / "laptop.img", output_dir / "laptop.img")
 
     return 0
 
