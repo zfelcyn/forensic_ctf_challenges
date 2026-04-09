@@ -1,11 +1,11 @@
 {
   "id": "ledger-burn",
-  "sortOrder": 2,
+  "sortOrder": 25,
   "title": "Ledger Burn",
   "status": "concept",
-  "category": "Anti-Forensics Techniques",
-  "difficulty": "Medium",
-  "points": 200,
+  "category": "Bonus",
+  "difficulty": "Bonus",
+  "points": 25,
   "summary": "A finance ZIP is padded with a hidden compressed payload after its official end-of-directory record.",
   "scenario": "A valid ZIP archive opens normally, but the raw file length exceeds what the ZIP metadata says it should contain. Solvers must use the central directory information to locate the real archive end, carve the trailing payload, and decompress the hidden evidence.",
   "recommendedTools": [

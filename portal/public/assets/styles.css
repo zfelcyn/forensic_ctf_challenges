@@ -529,6 +529,11 @@ body.challenge-focus-active .tree-panel {
   color: var(--danger);
 }
 
+.badge.bonus {
+  border-color: rgba(120, 199, 255, 0.38);
+  color: #8fd7ff;
+}
+
 .badge.concept,
 .badge.draft,
 .badge.ready,

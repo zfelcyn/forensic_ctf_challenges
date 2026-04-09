@@ -6,7 +6,7 @@ const state = {
 };
 
 const STORAGE_KEY = "forensic-ctf-portal-progress-v1";
-const difficultyOrder = ["Easy", "Medium", "Hard"];
+const difficultyOrder = ["Easy", "Medium", "Hard", "Bonus"];
 const challengeTree = document.querySelector("#challengeTree");
 const detailPanel = document.querySelector("#detailPanel");
 const challengeCount = document.querySelector("#challengeCount");
@@ -17,6 +17,7 @@ const badgeClassMap = {
   Easy: "easy",
   Medium: "medium",
   Hard: "hard",
+  Bonus: "bonus",
   concept: "concept",
   draft: "draft",
   ready: "ready",
@@ -220,12 +221,25 @@ function getRequestedIdFromHash() {
 }
 
 function renderTree(challenges) {
-  const groups = difficultyOrder
-    .map((difficulty) => ({
-      difficulty,
-      challenges: challenges.filter((challenge) => challenge.difficulty === difficulty),
-    }))
-    .filter((group) => group.challenges.length > 0);
+  const groupedChallenges = challenges.reduce((groups, challenge) => {
+    const difficulty = challenge.difficulty || "Unknown";
+    const existing = groups.get(difficulty) ?? [];
+    existing.push(challenge);
+    groups.set(difficulty, existing);
+    return groups;
+  }, new Map());
+
+  const orderedDifficulties = [
+    ...difficultyOrder.filter((difficulty) => groupedChallenges.has(difficulty)),
+    ...[...groupedChallenges.keys()]
+      .filter((difficulty) => !difficultyOrder.includes(difficulty))
+      .sort((left, right) => left.localeCompare(right)),
+  ];
+
+  const groups = orderedDifficulties.map((difficulty) => ({
+    difficulty,
+    challenges: groupedChallenges.get(difficulty) ?? [],
+  }));
 
   challengeTree.replaceChildren(
     ...groups.map((group) => {
