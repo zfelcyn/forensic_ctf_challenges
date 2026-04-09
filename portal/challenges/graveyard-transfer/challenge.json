@@ -45,10 +45,5 @@
   },
   "flagValidation": {
     "sha256": "12245be17bac69dbab440e0c316435c4a1cb179b1226dda56602419b371b38d2"
-  },
-  "llmHandoff": {
-    "scope": "This folder contains the metadata, generator, and internal notes for the challenge.",
-    "implementNext": "Tune the FTP case story, decoy transfer set, or hidden JPEG payload while keeping the multi-stream reconstruction path intact.",
-    "doNotDoYet": "Do not put the flag directly into plaintext control-channel traffic."
   }
 }

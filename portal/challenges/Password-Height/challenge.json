@@ -35,10 +35,5 @@
   },
   "flagValidation": {
     "sha256": "073c083741e6cd3c32390940ba7864bd5869a6b16311e38ebb13a70d4abe89e1"
-  },
-  "llmHandoff": {
-    "scope": "This folder is the full scope for the challenge.",
-    "implementNext": "Replace placeholder artifacts and write the real challenge files.",
-    "doNotDoYet": "Do not touch the portal frontend unless the challenge schema changes."
   }
 }

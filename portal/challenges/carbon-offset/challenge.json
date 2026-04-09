@@ -42,10 +42,5 @@
   },
   "flagValidation": {
     "sha256": "3604c16e86007cf3c07f8de6c60fc2a096308282ffa7aadae0cc43849710e5be"
-  },
-  "llmHandoff": {
-    "scope": "This folder contains the metadata, generator, and internal notes for the challenge.",
-    "implementNext": "Tune the generated image theme, decoy archive contents, or solver briefing while keeping the append-and-carve solve path intact.",
-    "doNotDoYet": "Do not expose the real flag in plaintext metadata or portal frontend files."
   }
 }

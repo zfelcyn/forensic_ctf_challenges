@@ -34,5 +34,3 @@ docker compose up -d --build
 ```
 
 Downloadable challenge bundles are generated on demand by each challenge folder's `generate.py`.
-
-Challenge handoff instructions live in `portal/docs/ADD_CHALLENGE_FOR_LLM.md`.

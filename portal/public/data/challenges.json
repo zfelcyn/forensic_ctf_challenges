@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-09T19:26:20.953268+00:00",
+  "generatedAt": "2026-04-09T19:35:43.245848+00:00",
   "challengeCount": 7,
   "categories": [
     "Bonus",
@@ -54,11 +54,6 @@
       "flagValidation": {
         "sha256": "3604c16e86007cf3c07f8de6c60fc2a096308282ffa7aadae0cc43849710e5be"
       },
-      "llmHandoff": {
-        "scope": "This folder contains the metadata, generator, and internal notes for the challenge.",
-        "implementNext": "Tune the generated image theme, decoy archive contents, or solver briefing while keeping the append-and-carve solve path intact.",
-        "doNotDoYet": "Do not expose the real flag in plaintext metadata or portal frontend files."
-      },
       "difficultyStars": 1,
       "paths": {
         "folder": "challenges/carbon-offset",
@@ -111,11 +106,6 @@
       },
       "flagValidation": {
         "sha256": "c3ddb9ad5eba840fdb4ab3dbc67d31743095250f687ac591f337b70637d06651"
-      },
-      "llmHandoff": {
-        "scope": "This folder contains the metadata, generator, and internal notes for the challenge.",
-        "implementNext": "Tune the food-court complaint narrative, embedded media naming, or hidden archive contents while preserving the package-inspection solve path.",
-        "doNotDoYet": "Do not make the hidden evidence directly readable from the outer DOCX bytes."
       },
       "difficultyStars": 2,
       "paths": {
@@ -172,11 +162,6 @@
       },
       "flagValidation": {
         "sha256": "12245be17bac69dbab440e0c316435c4a1cb179b1226dda56602419b371b38d2"
-      },
-      "llmHandoff": {
-        "scope": "This folder contains the metadata, generator, and internal notes for the challenge.",
-        "implementNext": "Tune the FTP case story, decoy transfer set, or hidden JPEG payload while keeping the multi-stream reconstruction path intact.",
-        "doNotDoYet": "Do not put the flag directly into plaintext control-channel traffic."
       },
       "difficultyStars": 3,
       "paths": {
@@ -247,11 +232,6 @@
       "flagValidation": {
         "sha256": "827e9a876d9c8cfe8f666428c7f260252b7cf4bdb8fcd7a7b4686e9b07fe3a74"
       },
-      "llmHandoff": {
-        "scope": "This folder contains the metadata, generator, and internal notes for the challenge.",
-        "implementNext": "Tune the email chain, clue encoding, or sealed memo contents while preserving the multi-email recovery path.",
-        "doNotDoYet": "Do not expose the attachment contents or real flag in plaintext portal assets."
-      },
       "difficultyStars": 3,
       "paths": {
         "folder": "challenges/marketkey-replay",
@@ -304,11 +284,6 @@
       },
       "flagValidation": {
         "sha256": "8a123c96eb2976a5fe8183f277b448a6efe13e6ab43b5bf8058ad35d846325f6"
-      },
-      "llmHandoff": {
-        "scope": "This folder contains the metadata, generator, and internal notes for the challenge.",
-        "implementNext": "Tune the visible finance records, trailing compressed payload, or difficulty hints while keeping the EOCD carve workflow intact.",
-        "doNotDoYet": "Do not replace the trailing payload with plaintext data."
       },
       "difficultyStars": 4,
       "paths": {
@@ -363,11 +338,6 @@
       "flagValidation": {
         "sha256": "f38c6f9facdb788cf84e5de3eb7642b95ffb572247018ab01d6c6dd642e37649"
       },
-      "llmHandoff": {
-        "scope": "This folder contains the full challenge definition, image asset, generator, and internal notes.",
-        "implementNext": "Improve the disk image realism, add decoy deleted files, or expand the solution notes while keeping the solve path centered on recovering a deleted text artifact.",
-        "doNotDoYet": "Do not expose the flag in plaintext metadata or move challenge assets outside this folder."
-      },
       "difficultyStars": 2,
       "paths": {
         "folder": "challenges/gone-but-not-forgotten",
@@ -413,11 +383,6 @@
       },
       "flagValidation": {
         "sha256": "073c083741e6cd3c32390940ba7864bd5869a6b16311e38ebb13a70d4abe89e1"
-      },
-      "llmHandoff": {
-        "scope": "This folder is the full scope for the challenge.",
-        "implementNext": "Replace placeholder artifacts and write the real challenge files.",
-        "doNotDoYet": "Do not touch the portal frontend unless the challenge schema changes."
       },
       "difficultyStars": 2,
       "paths": {

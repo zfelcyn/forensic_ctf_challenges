@@ -42,10 +42,5 @@
   },
   "flagValidation": {
     "sha256": "f38c6f9facdb788cf84e5de3eb7642b95ffb572247018ab01d6c6dd642e37649"
-  },
-  "llmHandoff": {
-    "scope": "This folder contains the full challenge definition, image asset, generator, and internal notes.",
-    "implementNext": "Improve the disk image realism, add decoy deleted files, or expand the solution notes while keeping the solve path centered on recovering a deleted text artifact.",
-    "doNotDoYet": "Do not expose the flag in plaintext metadata or move challenge assets outside this folder."
   }
 }

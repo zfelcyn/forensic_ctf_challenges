@@ -58,10 +58,5 @@
   },
   "flagValidation": {
     "sha256": "827e9a876d9c8cfe8f666428c7f260252b7cf4bdb8fcd7a7b4686e9b07fe3a74"
-  },
-  "llmHandoff": {
-    "scope": "This folder contains the metadata, generator, and internal notes for the challenge.",
-    "implementNext": "Tune the email chain, clue encoding, or sealed memo contents while preserving the multi-email recovery path.",
-    "doNotDoYet": "Do not expose the attachment contents or real flag in plaintext portal assets."
   }
 }

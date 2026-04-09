@@ -42,10 +42,5 @@
   },
   "flagValidation": {
     "sha256": "c3ddb9ad5eba840fdb4ab3dbc67d31743095250f687ac591f337b70637d06651"
-  },
-  "llmHandoff": {
-    "scope": "This folder contains the metadata, generator, and internal notes for the challenge.",
-    "implementNext": "Tune the food-court complaint narrative, embedded media naming, or hidden archive contents while preserving the package-inspection solve path.",
-    "doNotDoYet": "Do not make the hidden evidence directly readable from the outer DOCX bytes."
   }
 }

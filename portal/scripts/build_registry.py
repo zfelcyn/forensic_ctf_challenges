@@ -27,7 +27,6 @@ REQUIRED_FIELDS = (
     "sourceNotes",
     "deployment",
     "flagValidation",
-    "llmHandoff",
 )
 
 DIFFICULTY_STARS = {
