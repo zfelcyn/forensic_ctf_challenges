@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-09T18:29:04.538613+00:00",
+  "generatedAt": "2026-04-09T19:26:20.953268+00:00",
   "challengeCount": 7,
   "categories": [
     "Bonus",
@@ -412,7 +412,7 @@
         "launchUrl": null
       },
       "flagValidation": {
-        "sha256": "8c6fb1e9e37a1aea1d308c785192e1a17d71cef08c7f50a68d2e0ab292b2e7f4"
+        "sha256": "073c083741e6cd3c32390940ba7864bd5869a6b16311e38ebb13a70d4abe89e1"
       },
       "llmHandoff": {
         "scope": "This folder is the full scope for the challenge.",
