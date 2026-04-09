@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-09T19:35:43.245848+00:00",
+  "generatedAt": "2026-04-09T19:40:57.284464+00:00",
   "challengeCount": 7,
   "categories": [
     "Bonus",
@@ -67,9 +67,9 @@
       "sortOrder": 3,
       "title": "Template Bleed",
       "status": "concept",
-      "category": "File System Forensics",
-      "difficulty": "Medium",
-      "points": 200,
+      "category": "Bonus",
+      "difficulty": "Bonus",
+      "points": 25,
       "summary": "A mall incident DOCX about food-court sabotage still leaks a hidden draft asset tied to the Jamba Juice vs. Cinnabon feud.",
       "scenario": "Kyan Kotschevar-Smead still works at Jamba Juice after leaking classified Boeing materials, and has been documenting repeated sabotage after James Richards-Perhatch from Cinnabon started poaching customers and interfering with orders. Mall management distributed a cleaned-up DOCX packet, but one embedded media object still contains a concealed draft archive from the original complaint. Solvers need to unpack the Office container, inspect the `word/media` assets, and carve the hidden payload to recover the flag.",
       "recommendedTools": [
@@ -107,7 +107,7 @@
       "flagValidation": {
         "sha256": "c3ddb9ad5eba840fdb4ab3dbc67d31743095250f687ac591f337b70637d06651"
       },
-      "difficultyStars": 2,
+      "difficultyStars": 4,
       "paths": {
         "folder": "challenges/template-bleed",
         "manifest": "challenges/template-bleed/challenge.json",

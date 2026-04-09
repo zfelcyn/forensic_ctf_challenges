@@ -44,10 +44,13 @@ async function loadChallenges() {
 }
 
 function renderMetrics(challenges) {
+  const bonusChallenges = challenges.filter((challenge) => challenge.difficulty === "Bonus");
+  const regularChallengeCount = challenges.length - bonusChallenges.length;
   const solvedChallenges = challenges.filter((challenge) => state.solvedIds.has(challenge.id));
   const unlockedPoints = solvedChallenges.reduce((total, challenge) => total + challenge.points, 0);
 
-  challengeCount.textContent = String(challenges.length);
+  challengeCount.textContent =
+    bonusChallenges.length > 0 ? `${regularChallengeCount} + ${bonusChallenges.length} bonus` : String(regularChallengeCount);
   solvedCount.textContent = String(solvedChallenges.length);
   pointsCount.textContent = String(unlockedPoints);
 }
